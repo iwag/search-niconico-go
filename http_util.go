@@ -6,8 +6,8 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
-  "log"
-  "os"
+	"log"
+	"os"
 )
 
 const SEARCH_API = "http://api.search.nicovideo.jp/"
@@ -34,7 +34,7 @@ func parseJson(body io.ReadCloser, intf *interface{}, debug bool) error {
 }
 
 func post(path string, values url.Values, intf interface{}, debug bool) error {
-  resp, err := HTTPClient.PostForm(SEARCH_API + path, values)
+	resp, err := HTTPClient.PostForm(SEARCH_API + path, values)
 	if err != nil {
 		return err
 	}
