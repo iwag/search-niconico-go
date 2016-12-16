@@ -34,7 +34,7 @@ func parseJson(body io.ReadCloser, intf *interface{}, debug bool) error {
 }
 
 func post(path string, values url.Values, intf interface{}, debug bool) error {
-	resp, err := HTTPClient.PostForm(SEARCH_API + path, values)
+	resp, err := HTTPClient.Get(SEARCH_API + path + "?" + values.Encode())
 	if err != nil {
 		return err
 	}
