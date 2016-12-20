@@ -55,7 +55,7 @@ func (client *Client) _search(path, query string, params SearchParameters) (resp
 	}
 	queries.Add("_sort", params.Sort)
 	queries.Add("_limit", strconv.Itoa(params.Limit))
-	queries.Add("fields", params.Sort)
+	queries.Add("fields", params.Fields)
 	queries.Add("targets", params.Targets)
 
 	response = &SearchResponse{}
@@ -69,19 +69,19 @@ func (client *Client) _search(path, query string, params SearchParameters) (resp
 	return response, nil
 }
 
-func (client *Client) Search(path, query string, params SearchParameters) (*MetaResponse, error) {
+func (client *Client) Search(path, query string, params SearchParameters) (*SearchResponse, error) {
 	if response, err := client._search(path, query, params); err != nil {
 		return nil, err
 	} else {
-		return &response.MetaResponse, nil
+		return response, nil
 	}
 }
 
 func main() {
 	client := New()
-	res, err := client.Search("v2/video/contents/search", "test", CreateSearchParameters())
+	res, err := client.Search("api/v2/video/contents/search", "test", CreateSearchParameters())
 	if err != nil {
-		fmt.Printf("%s\n", err)
+		fmt.Printf("client err:%s\n", err)
 		return
 	}
 	fmt.Printf("response: %v\n", res)
