@@ -27,8 +27,16 @@ type MetaResponse struct {
 	Id         string `json:"id"`
 }
 
+type SearchHit struct {
+	ContentId string     `json:"contentId"`
+	Title     string     `json:"title"`
+	tags      string     `json:"tags"`
+	startTime string     `json:"startTime"`
+}
+
 type SearchResponse struct {
-	MetaResponse   `json:"meta"`
+	MetaResponse    `json:"meta"`
+	Hits			[]SearchHit `json:"data"`
 }
 
 func CreateSearchParameters() SearchParameters {
