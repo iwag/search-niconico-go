@@ -87,7 +87,9 @@ func (client *Client) Search(path, query string, params SearchParameters) (*Sear
 
 func main() {
 	client := New()
-	res, err := client.Search("api/v2/video/contents/search", "test", CreateSearchParameters())
+	params := CreateSearchParameters()
+	params.Fields = "contentId,title,tags,startTime,thumbnailUrl"
+	res, err := client.Search("api/v2/video/contents/search", "test", params)
 	if err != nil {
 		fmt.Printf("client err:%s\n", err)
 		return
