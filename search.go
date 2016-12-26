@@ -12,6 +12,7 @@ const (
 	DEFAULT_SEARCH_TARGETS = "tags,title"
 	DEFAULT_SEARCH_FIELDS = "contentId,title,tags,startTime"
 	DEFAULT_SEARCH_LIMIT = 25
+	DEFAULT_SEARCH_CONTEXT = "github.com/iwag/search-go"
 )
 
 type SearchParameters struct {
@@ -19,6 +20,7 @@ type SearchParameters struct {
 	Fields  string
 	Sort    string
 	Limit   int
+	Context string
 }
 
 type MetaResponse struct {
@@ -45,6 +47,7 @@ func CreateSearchParameters() SearchParameters {
 		Targets:  DEFAULT_SEARCH_TARGETS,
 		Fields:   DEFAULT_SEARCH_FIELDS,
 		Limit:    DEFAULT_SEARCH_LIMIT,
+		Context:  DEFAULT_SEARCH_CONTEXT,
 	}
 }
 
@@ -65,6 +68,7 @@ func (client *Client) _search(path, query string, params SearchParameters) (resp
 	queries.Add("_limit", strconv.Itoa(params.Limit))
 	queries.Add("fields", params.Fields)
 	queries.Add("targets", params.Targets)
+	queries.Add("_context", params.Context)
 
 	response = &SearchResponse{}
 	if err := post(path, queries, response, client.debug); err != nil {
