@@ -32,8 +32,8 @@ type MetaResponse struct {
 type SearchHit struct {
 	ContentId string     `json:"contentId"`
 	Title     string     `json:"title"`
-	tags      string     `json:"tags"`
-	startTime string     `json:"startTime"`
+	Tags      string     `json:"tags"`
+	StartTime string     `json:"startTime"`
 }
 
 type SearchResponse struct {
